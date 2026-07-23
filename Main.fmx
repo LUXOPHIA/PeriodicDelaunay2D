@@ -1,0 +1,95 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Periodic Delaunay 2D'
+  ClientHeight = 520
+  ClientWidth = 630
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  inline Viewer1: TPeriDelaunayViewer
+    Align = Client
+    Margins.Left = 10.00000000000000000
+    Margins.Top = 10.00000000000000000
+    Margins.Right = 10.00000000000000000
+    Margins.Bottom = 10.00000000000000000
+    Size.Width = 500.00000000000000000
+    Size.Height = 500.00000000000000000
+    Size.PlatformDefault = False
+    OnMouseDown = Viewer1MouseDown
+  end
+  object Panel1: TPanel
+    Align = Right
+    Margins.Left = -10.00000000000000000
+    Position.X = 510.00000000000000000
+    Size.Width = 120.00000000000000000
+    Size.Height = 520.00000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'pushpanel'
+    TabOrder = 1
+    object ButtonC: TButton
+      Margins.Left = 8.00000000000000000
+      Margins.Top = 8.00000000000000000
+      Margins.Right = 8.00000000000000000
+      Position.X = 10.00000000000000000
+      Position.Y = 10.00000000000000000
+      Size.Width = 100.00000000000000000
+      Size.Height = 60.00000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Clear'
+      OnClick = ButtonCClick
+    end
+    object ButtonAR: TButton
+      Margins.Left = 8.00000000000000000
+      Margins.Top = 8.00000000000000000
+      Margins.Right = 8.00000000000000000
+      Position.X = 10.00000000000000000
+      Position.Y = 80.00000000000000000
+      Size.Width = 100.00000000000000000
+      Size.Height = 60.00000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Add x10'#13#10'( Random )'
+      OnClick = ButtonARClick
+    end
+    object ButtonD: TButton
+      Margins.Left = 8.00000000000000000
+      Margins.Top = 8.00000000000000000
+      Margins.Right = 8.00000000000000000
+      Position.X = 10.00000000000000000
+      Position.Y = 220.00000000000000000
+      Size.Width = 100.00000000000000000
+      Size.Height = 60.00000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Del x10'
+      OnClick = ButtonDClick
+    end
+    object ButtonAP: TButton
+      Margins.Left = 8.00000000000000000
+      Margins.Top = 8.00000000000000000
+      Margins.Right = 8.00000000000000000
+      Position.X = 10.00000000000000000
+      Position.Y = 150.00000000000000000
+      Size.Width = 100.00000000000000000
+      Size.Height = 60.00000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Add x10'#13#10'( Poisson-disk )'
+      OnClick = ButtonAPClick
+    end
+    object LabelI: TLabel
+      Position.X = 10.00000000000000000
+      Position.Y = 290.00000000000000000
+      Size.Width = 100.00000000000000000
+      Size.Height = 60.00000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+    end
+  end
+end
