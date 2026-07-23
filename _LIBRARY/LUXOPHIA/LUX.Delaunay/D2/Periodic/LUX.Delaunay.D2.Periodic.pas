@@ -213,6 +213,7 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        function WrapPos( const Pos_:TSingle2D ) :TSingle2D;  // 任意の座標を正準座標（∈ [0,L)²・グリッド上）へ写す
        function TorusDist2( const A_,B_:TSingle2D ) :Single;  // トーラス距離の平方（引数は正準座標）
        function HitCircleFace( const Pos_:TSingle2D ) :TPeriFace2D;  // Pos_ を空円に含む面（ジャンプ＆ウォーク）
+       function FindMaxCircle :TPeriFace2D;  // 最大半径の空円を持つ面（面が無ければ nil。トーラス上に無限半径の面は無いので全面が対象）
        function FindNearPoin( const Pos_:TSingle2D; out Poin_:TPeriPoin2D ) :Single;  // 最近傍サイトの頂点と、そのトーラス距離
        function AddPoin( const Pos_:TSingle2D ) :TPeriPoin2D;  // サイトの追加（重複・共円の退化は nil）
        function DeletePoin( const Poin_:TPeriPoin2D ) :Boolean;  // サイトの削除（局所処理。退化時のみ再構築）
@@ -1867,6 +1868,24 @@ var
    T :TPoint;
 begin
      if not FindHitLift( WrapPos( Pos_ ), MaxInt, Result, T ) then Result := nil;
+end;
+
+//------------------------------------------------------------------------------
+
+function TPeriDelaunay2D.FindMaxCircle :TPeriFace2D;
+var
+   F :TPeriFace2D;
+   C :TDouble2D;
+   R2, Rm :Double;
+begin
+     Result := nil;  Rm := -1;
+
+     for F in Faces do  // トーラス上の面は全て有限（無限半径の面は無い）。外接円半径の平方で比べる
+     begin
+          F.CircumD( C, R2 );
+
+          if R2 > Rm then begin  Rm := R2;  Result := F;  end;
+     end;
 end;
 
 //------------------------------------------------------------------------------
