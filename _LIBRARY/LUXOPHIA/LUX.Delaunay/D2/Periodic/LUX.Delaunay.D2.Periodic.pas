@@ -196,7 +196,7 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        function IsHitLift( const Face_:TPeriFace2D; const T_:TPoint; const MP_:TPoint; const QRank_:Integer ) :Boolean;
        function FindHitLift( const Pos_:TSingle2D; const QRank_:Integer; out Face_:TPeriFace2D; out T_:TPoint ) :Boolean;
        function InsertPoin( const Poin_:TPeriPoin2D; const Face_:TPeriFace2D; const T0_:TPoint ) :Boolean;
-       function TryLocalDelete( const Poin_:TPeriPoin2D ) :Boolean;
+       function RemovePoin( const Poin_:TPeriPoin2D ) :Boolean;
        procedure RemoveSiteAt( const Site_:Integer );
        procedure BuildAll;
      protected
@@ -1414,7 +1414,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-function TPeriDelaunay2D.TryLocalDelete( const Poin_:TPeriPoin2D ) :Boolean;
+function TPeriDelaunay2D.RemovePoin( const Poin_:TPeriPoin2D ) :Boolean;
 // 局所削除。頂点のひとつのリフト v̂ の周りの星を角の巡回で集め、穴の境界多角形を
 // リフト座標で取り出し、ドロネー耳（他のリンク頂点とその平行移動像を外接円に含まない
 // 耳）で埋める。埋め草の計画と縫合の検証が完成してから初めてメッシュに触れる
@@ -2005,7 +2005,7 @@ begin
      end
      else
      begin
-          if not TryLocalDelete( Poin_ ) then Exit;  // 退化配置で埋め戻せなければ、何も変えずに False（平面版と同じ）
+          if not RemovePoin( Poin_ ) then Exit;  // 退化配置で埋め戻せなければ、何も変えずに False（平面版と同じ）
 
           Inc( _LocalDelN );
 
